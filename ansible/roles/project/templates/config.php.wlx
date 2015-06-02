@@ -1,0 +1,30 @@
+<?php
+
+// 微信配置
+defined('WSTORE_MAIN_ACCOUNT_ORGINAL_ID') or define('WSTORE_MAIN_ACCOUNT_ORGINAL_ID', 'gh_8a4029eaba62'); // 微乐秀官方账号原始 ID, 用于登录 和获取 会员信息 等
+defined('WSTORE_OPEN_APPID') or define('WSTORE_OPEN_APPID', 'wx80655757a659b1d9');
+defined('WSTORE_OPEN_APPSECRET') or define('WSTORE_OPEN_APPSECRET', '0c79e1fa963cd80cc0be99b20a18faeb');
+
+defined('WSTORE_KCLIB_PATH') or define('WSTORE_KCLIB_PATH', '/vagrant/project/kc_lib/');
+
+defined('YII_DEBUG') or define('YII_DEBUG',false);
+
+defined('WSTORE_SDK_SERVER_LOG') or define('WSTORE_SDK_SERVER_LOG', YII_DEBUG?'protected/runtime/SDK_SERVER_LOG':false);
+defined('WSTORE_WECHAT_CALLBACK_LOG') or define('WSTORE_WECHAT_CALLBACK_LOG', YII_DEBUG?'protected/runtime/WECHAT_CALLBACK_LOG':false);
+defined('WSTORE_APP_PROXY_LOG') or define('WSTORE_APP_PROXY_LOG', YII_DEBUG?'protected/runtime/WECHAT_APP_PROXY_LOG':false);
+
+//基本配置文件
+return array(
+    'name'=>'微信应用商城',
+    //数据库配置
+    'components'=> array( 
+        'db'=>array(
+            'connectionString' => 'mysql:host=127.0.0.1;dbname=wstore',
+            'emulatePrepare' => true,
+            'tablePrefix' => 'ws_',
+            'username' => 'root',
+            'password' => 'root',
+            'charset' => 'utf8',
+        ),
+    ),
+);

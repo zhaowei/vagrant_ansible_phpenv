@@ -1,0 +1,15 @@
+---
+- hosts: dev
+  sudo: True
+  vars_files:
+    - defaults/variables.yml
+  roles:
+    - common
+    - nginx
+    - mysql
+#- postgresql
+    - phpenv
+#- for_cakephp
+    - phpmyadmin
+    - project
+

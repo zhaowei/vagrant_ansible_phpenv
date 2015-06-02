@@ -1,0 +1,7 @@
+---
+- name: composer安装
+  ignore_errors: true
+  raw: curl -sS https://getcomposer.org/installer | php
+- name: composer配置
+  ignore_errors: true
+  command: mv composer.phar /usr/local/bin/composer

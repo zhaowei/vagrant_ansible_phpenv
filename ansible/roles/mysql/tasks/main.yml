@@ -1,0 +1,32 @@
+---
+- name: 安装 MySQL 依赖文件
+  yum: name={{ item }} state=present
+  with_items:
+  - mysql-server
+  - mysql
+  - MySQL-python
+  - libselinux-python
+  - libsemanage-python
+  - mysql-devel
+- name: MySQL安装
+  yum: name={{ item }} state=present
+  with_items:
+    - mysql
+- name: my.cnf设置
+  copy: src=my.cnf dest=/etc/my.cnf owner=root group=root
+#  notify: restart mysql
+- name: MySQL启动
+  service: name=mysqld state=started enabled=yes
+- name: create root MySQL users
+  mysql_user: name={{ mysql_root_user }} password={{ mysql_root_pass }} host={{ item }} state=present
+  ignore_errors: true
+  with_items:
+    - "%"
+    - "{{ ansible_eth1.ipv4.address }}"
+    - 127.0.0.1
+    - ::1
+    - localhost
+#notify: restart mysql
+  tags: mysql
+- name: MySQL启动
+  service: name=mysqld state=restarted enabled=yes

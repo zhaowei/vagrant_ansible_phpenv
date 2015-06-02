@@ -1,0 +1,16 @@
+---
+- name: docroot生成
+  file: path={{ docroot }} mode=0777 owner=nginx group=nginx force=yes state=directory
+- name: php-fpm.conf设置
+  template: src=php-fpm.conf.j2 dest=/usr/local/share/phpenv/versions/{{ php_version }}/etc/php-fpm.conf
+- name: php-fpm 启动
+  template: src=php-fpm.j2 dest=/etc/init.d/php-fpm mode=0755
+- name: php-fpm 启动确认
+  command: pgrep php-fpm
+  ignore_errors: true
+  register: check_fpm
+- name: php-fpm 启动
+  command: /sbin/service php-fpm start
+  when: check_fpm|failed
+- name: php-fpm chkconfig on服务配置
+  service: name=php-fpm enabled=yes

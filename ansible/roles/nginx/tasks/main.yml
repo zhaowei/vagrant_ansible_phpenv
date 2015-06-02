@@ -1,0 +1,11 @@
+---
+- name: Nginx配置
+  ignore_errors: true
+  action: shell rpm -Uvh http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm
+- name: Nginx
+  copy: src=nginx.repo dest=/etc/yum.repos.d/nginx.repo owner=root group=root
+- name: Nginx安装
+  yum: pkg=nginx state=installed enablerepo=nginx
+- name: Nginx启动
+  service: name=nginx state=started enabled=yes
+

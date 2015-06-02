@@ -1,0 +1,13 @@
+- name: checkout common lib code
+  tags: po_wlx
+#shell: svn --username zhao --password zoooooo  co svn://svn.kcdns.net/kc_lib/trunk /vagrant
+  subversion: username={{svn_username}} password={{svn_password}} repo=svn://svn.kcdns.net/kc_lib/trunk dest=/vagrant/project/kc_libs
+- name: checkout wlx code
+  tags: po_wlx
+  subversion: username={{svn_username}} password={{svn_password}} repo=svn://svn.kcdns.net/wstore/trunk dest=/vagrant/project/wstore
+- name: checkout wlx-app code
+  tags: po_wlx
+  subversion: username={{svn_username}} password={{svn_password}} repo=svn://svn.kcdns.net/wstore_app/trunk dest=/vagrant/project/wstore_app
+- name: config-wlx
+  tags: po_wlx
+  template: src=config.php.wlx dest=/vagrant/project/wstore/config.php

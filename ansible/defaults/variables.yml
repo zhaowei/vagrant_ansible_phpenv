@@ -1,0 +1,24 @@
+hostname: "phpenv.vagrant"
+allow_ip_address: "127.0.0.1/255.255.0.0"
+username: "vagrant"
+usergroup: "vagrant"
+
+svn_username: "demo"
+svn_password: "demo"
+php_version: "5.3.20"
+php_fpm_port: "50055"
+docroot: "/var/www/html/"
+dbname: "testdb"
+
+mysql_root_user: root
+mysql_root_pass: root
+mysql_db: kcdns
+mysql_bind_address: 0.0.0.0  # Allows all connections, for Production it should be 127.0.0.1
+mysql_key_buffer: 64M
+
+
+vhosts:
+  [
+    { name: 'test.local', rootFolder: '/vagrant/project/work'},
+    { name: 'phpmyadmin.local', rootFolder: '/usr/share/phpMyAdmin'},
+  ]

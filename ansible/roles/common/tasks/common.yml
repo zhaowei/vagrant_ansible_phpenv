@@ -1,0 +1,23 @@
+---
+- name: hostname
+  hostname: name={{ hostname }}
+- name: sysyconfig/i18n 中文 zh_CN
+  raw: sed -i.org -e "s/LANG=\"C\"/LANG=\"zh_CN.UTF-8\"/" /etc/sysconfig/i18n
+- name: SELinux
+  yum: name=libselinux-python state=installed
+- name: SELinux
+  selinux: state=disabled
+- name: SELinux
+  shell: if [ "`/usr/sbin/getenforce`" = "Enforcing" ]; then /usr/sbin/setenforce 0; fi
+- name: 基础工具 git git-svn unzip wget vim
+  yum: pkg={{ item }} state=installed
+  with_items:
+    - git
+    - git-svn
+    - unzip
+    - wget
+    - vim
+- name: iptables配置
+  template: src=iptables.j2 dest=/etc/sysconfig/iptables owner=root group=root mode=0644
+  notify:
+    - restart iptables

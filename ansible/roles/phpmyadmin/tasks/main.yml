@@ -1,0 +1,9 @@
+- name: ensure PhpMyAdmin installed
+  yum: name=phpmyadmin state=present
+  tags: phpmyadmin
+  notify:
+    - restart phpfpm
+- name: 去掉版本更新
+  template: src=version_check.php dest=/usr/share/phpMyAdmin/version_check.php
+- name: 允许本地登录
+  template: src=config.default.php dest=/usr/share/phpMyAdmin/libraries/config.default.php
